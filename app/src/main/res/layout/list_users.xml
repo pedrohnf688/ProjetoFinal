@@ -12,23 +12,53 @@
     card_view:cardCornerRadius="4dp">
 
     <LinearLayout
-        android:id="@+id/li"
-        android:layout_width="match_parent"
+        android:id="@+id/li3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <LinearLayout
+        android:id="@+id/li2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textViewNome"
-            android:layout_width="match_parent"
+            android:id="@+id/MostraNome"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-
+            android:text="Nome:"
+            android:textStyle="bold"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
         <TextView
-            android:id="@+id/textViewEmail"
-            android:layout_width="match_parent"
+            android:id="@+id/MostrarEmail"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+            android:text="Email:"
+            android:textStyle="bold"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/li1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/textViewNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/textViewEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        </LinearLayout>
+
     </LinearLayout>
 </android.support.v7.widget.CardView>

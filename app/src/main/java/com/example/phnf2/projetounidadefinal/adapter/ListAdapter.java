@@ -1,9 +1,11 @@
-package com.example.phnf2.projetounidadefinal;
+package com.example.phnf2.projetounidadefinal.adapter;
 
 import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.phnf2.projetounidadefinal.R;
 import com.example.phnf2.projetounidadefinal.modelo.Usuario;
 
 import java.util.List;
@@ -46,7 +49,6 @@ public class ListAdapter extends RecyclerView.Adapter {
         listT.textViewNome2.setText(usuarioescolhido.getNomeUser());
         listT.textViewEmail2.setText(usuarioescolhido.getEmailUser());
 
-
     }
 
     @Override
@@ -59,12 +61,14 @@ public class ListAdapter extends RecyclerView.Adapter {
 
         final TextView textViewNome2;
         final TextView textViewEmail2;
+        final FloatingActionButton floatingActionAddRelatorio;
 
         public ViewHolder(View v) {
             super(v);
 
             textViewNome2 = v.findViewById(R.id.textViewNome);
             textViewEmail2 = v.findViewById(R.id.textViewEmail);
+            floatingActionAddRelatorio = itemView.findViewById(R.id.fab);
         }
     }
 }
