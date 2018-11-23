@@ -10,4 +10,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+     <string name="twitter_consumer_key" translatable="false">MOEJ406E8KniMqCrhT5T7o5bx</string>
+     <string name="twitter_consumer_secret" translatable="false">dlVJTZoXFBVzxWGmx1d9amm5JCLvbPQeIbQJlBh0fopyZTF4S9</string>
+
 </resources>

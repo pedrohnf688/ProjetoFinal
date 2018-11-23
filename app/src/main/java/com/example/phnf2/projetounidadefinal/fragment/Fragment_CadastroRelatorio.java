@@ -22,7 +22,9 @@ import com.example.phnf2.projetounidadefinal.modelo.Relatorio;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
@@ -39,6 +41,7 @@ public class Fragment_CadastroRelatorio extends Fragment {
     DatabaseReference databaseRelatorios;
     String id;
     String nome;
+    private FirebaseDatabase mFirebase;
 
     @SuppressLint("ValidFragment")
     public Fragment_CadastroRelatorio(String id,String nome) {
@@ -61,16 +64,23 @@ public class Fragment_CadastroRelatorio extends Fragment {
         buttonaddRelatorio = view.findViewById(R.id.buttonaddRelatorio);
 
 
-        Bundle bundle = getArguments();
-
-
-
         Log.i("ID", "ID:" + id + "NOME:" + nome);
         Toast.makeText(getContext(), "ID:" + id + "NOME:" + nome, Toast.LENGTH_SHORT).show();
 
         nomeVisualizar.setText(nome);
 
-        databaseRelatorios = FirebaseDatabase.getInstance().getReference("Relatorios").child(id);
+
+            mFirebase = FirebaseDatabase.getInstance();
+            if(mFirebase == null) {
+
+                mFirebase.setPersistenceEnabled(true);
+                databaseRelatorios = mFirebase.getReference("Relatorios").child(id);
+
+            }else{
+
+                databaseRelatorios = mFirebase.getReference("Relatorios").child(id);
+                databaseRelatorios.keepSynced(true);
+            }
 
         buttonaddRelatorio.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +109,7 @@ public class Fragment_CadastroRelatorio extends Fragment {
 
             Fragment_ListarRelatorio fragment_listarRelatorio = new Fragment_ListarRelatorio(id,nome);
 
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal,fragment_listarRelatorio).commit();
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal,fragment_listarRelatorio).addToBackStack(null).commit();
 
 
         } else {

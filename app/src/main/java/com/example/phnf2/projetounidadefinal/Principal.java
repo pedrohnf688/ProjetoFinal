@@ -1,6 +1,10 @@
 package com.example.phnf2.projetounidadefinal;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -13,6 +17,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.phnf2.projetounidadefinal.fragment.Fragment_Cadastro;
@@ -20,12 +26,19 @@ import com.example.phnf2.projetounidadefinal.fragment.Fragment_CadastroRelatorio
 import com.example.phnf2.projetounidadefinal.fragment.Fragment_Inicio;
 import com.example.phnf2.projetounidadefinal.fragment.Fragment_ListarRelatorio;
 import com.example.phnf2.projetounidadefinal.fragment.Fragment_ListarUser;
+import com.firebase.ui.auth.AuthUI;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Arrays;
 
 public class Principal extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Fragment fragment;
+    TextView nomeAdmin;
+    TextView emailAdmin;
+    ImageView photoURL;
 
-    public String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,21 +47,26 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        nomeAdmin = findViewById(R.id.NomeAdmin);
+        emailAdmin = findViewById(R.id.EmailAdmin);
+        photoURL = findViewById(R.id.imageViewAdmin);
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-
-        //Código para deixa item no nav invisivel
-        // Menu nav_Menu = navigationView.getMenu();
-        //  nav_Menu.findItem(R.id.nav_cadastroUser).setVisible(false);
-
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal,new Fragment_Inicio()).addToBackStack(null).commit();
+
     }
 
     @Override
@@ -58,18 +76,24 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
             drawer.closeDrawer(GravityCompat.START);
         } else {
 
-            if (fragment instanceof Fragment_Inicio) {
-                super.onBackPressed();
-
+            if(getSupportFragmentManager().getBackStackEntryCount() > 0){
+                getSupportFragmentManager().popBackStack();
             }else{
-
-                fragment = new Fragment_Inicio();
-
-                if (fragment != null) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal, fragment).commit();
-
-                }
+                super.onBackPressed();
             }
+
+//            if (fragment instanceof Fragment_Inicio) {
+//                super.onBackPressed();
+//
+//            }else{
+//
+//                fragment = new Fragment_Inicio();
+//
+//                if (fragment != null) {
+//                    getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal, fragment).commit();
+//
+//                }
+//            }
         }
     }
 
@@ -89,6 +113,7 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            AuthUI.getInstance().signOut(this);
             return true;
         }
 
@@ -102,11 +127,11 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
         int id = item.getItemId();
 
         if(id == R.id.nav_inicio){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal, new Fragment_Inicio()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal, new Fragment_Inicio()).addToBackStack(null).commit();
         }else if (id == R.id.nav_cadastroUser) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal, new Fragment_Cadastro()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal, new Fragment_Cadastro()).addToBackStack(null).commit();
         } else if (id == R.id.nav_listarUser) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal, new Fragment_ListarUser()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal, new Fragment_ListarUser()).addToBackStack(null).commit();
         } else if (id == R.id.nav_listarRelatorio) {
            //Listar cada Relatorio Cadastrado por Usuario
             Toast.makeText(this, "Listar Relatório", Toast.LENGTH_SHORT).show();
@@ -131,4 +156,9 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+
+
+
 }

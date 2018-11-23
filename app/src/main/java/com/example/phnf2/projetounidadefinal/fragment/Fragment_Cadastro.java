@@ -34,6 +34,7 @@ public class Fragment_Cadastro extends Fragment {
     DatabaseReference databaseUsuario;
     ChildEventListener mchildEventListener;
     List<Usuario> listUsuarios;
+    private FirebaseDatabase mFirebase;
 
 
     public Fragment_Cadastro() {
@@ -53,7 +54,19 @@ public class Fragment_Cadastro extends Fragment {
         buttonaddUsuario1 = view.findViewById(R.id.buttonaddUsuario);
         listViewUsuario = view.findViewById(R.id.ListViewUsuario);
 
-        databaseUsuario = FirebaseDatabase.getInstance().getReference("Usuarios");
+
+            mFirebase = FirebaseDatabase.getInstance();
+
+            if(mFirebase == null) {
+
+                mFirebase.setPersistenceEnabled(true);
+                databaseUsuario = mFirebase.getReference("Usuarios");
+
+            }else{
+
+                databaseUsuario = mFirebase.getReference("Usuarios");
+                databaseUsuario.keepSynced(true);
+            }
 
         listUsuarios = new ArrayList<>();
 

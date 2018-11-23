@@ -38,6 +38,7 @@ public class Fragment_ListarUser extends Fragment {
     public static List<Usuario> listUsuarios = new ArrayList<>();
     RecyclerView listViewUsuario;
     DatabaseReference databaseUsuario;
+    private FirebaseDatabase mFirebase;
 
     public Fragment_ListarUser() {
         // Required empty public constructor
@@ -52,7 +53,21 @@ public class Fragment_ListarUser extends Fragment {
 
 
         listViewUsuario = view.findViewById(R.id.ListViewUsuario);
-        databaseUsuario = FirebaseDatabase.getInstance().getReference("Usuarios");
+
+           mFirebase = FirebaseDatabase.getInstance();
+
+        if(mFirebase == null) {
+
+            mFirebase.setPersistenceEnabled(true);
+            databaseUsuario = mFirebase.getReference("Usuarios");
+
+        }else{
+
+            databaseUsuario = mFirebase.getReference("Usuarios");
+            databaseUsuario.keepSynced(true);
+        }
+
+
 
 
         listViewUsuario.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), listViewUsuario, new RecyclerItemClickListener.OnItemClickListener() {
@@ -74,7 +89,7 @@ public class Fragment_ListarUser extends Fragment {
 
                         Toast.makeText(getContext(), "Nome:"+user4.getNomeUser(), Toast.LENGTH_SHORT).show();
 
-                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal,fragment).commit();
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal,fragment).addToBackStack(null).commit();
 
                     }
                 })

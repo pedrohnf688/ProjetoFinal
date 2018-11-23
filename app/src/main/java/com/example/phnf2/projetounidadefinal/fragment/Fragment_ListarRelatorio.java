@@ -43,6 +43,8 @@ public class Fragment_ListarRelatorio extends Fragment {
     FloatingActionButton floatingActionAddRelatorio;
     public String id;
     public String nome;
+    private FirebaseDatabase mFirebase;
+
 
     @SuppressLint("ValidFragment")
     public Fragment_ListarRelatorio(String id,String nome) {
@@ -51,6 +53,9 @@ public class Fragment_ListarRelatorio extends Fragment {
         this.nome = nome;
     }
 
+    public Fragment_ListarRelatorio() {
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,7 +67,17 @@ public class Fragment_ListarRelatorio extends Fragment {
         floatingActionAddRelatorio = view.findViewById(R.id.fab);
 
 
-        databaseRelatorio = FirebaseDatabase.getInstance().getReference("Relatorios").child(id);
+            mFirebase = FirebaseDatabase.getInstance();
+
+        if(mFirebase == null) {
+
+            mFirebase.setPersistenceEnabled(true);
+            databaseRelatorio = mFirebase.getReference("Relatorios").child(id);
+
+        }else{
+            databaseRelatorio = mFirebase.getReference("Relatorios").child(id);
+            databaseRelatorio.keepSynced(true);
+        }
 
         floatingActionAddRelatorio.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +85,7 @@ public class Fragment_ListarRelatorio extends Fragment {
 
                 Fragment_CadastroRelatorio fragment = new Fragment_CadastroRelatorio(id,nome);
 
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal,fragment).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal,fragment).addToBackStack(null).commit();
 
             }
         });
