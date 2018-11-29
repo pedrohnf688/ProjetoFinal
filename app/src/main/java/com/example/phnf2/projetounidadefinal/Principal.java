@@ -21,16 +21,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.phnf2.projetounidadefinal.fragment.Fragment_Cadastro;
 import com.example.phnf2.projetounidadefinal.fragment.Fragment_CadastroRelatorio;
+import com.example.phnf2.projetounidadefinal.fragment.Fragment_EditarUsers;
 import com.example.phnf2.projetounidadefinal.fragment.Fragment_Inicio;
 import com.example.phnf2.projetounidadefinal.fragment.Fragment_ListarRelatorio;
 import com.example.phnf2.projetounidadefinal.fragment.Fragment_ListarUser;
+import com.example.phnf2.projetounidadefinal.modelo.Administrador;
+import com.example.phnf2.projetounidadefinal.util.FirebaseUtil;
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Arrays;
+import java.util.UUID;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Principal extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -38,6 +47,8 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
     TextView nomeAdmin;
     TextView emailAdmin;
     ImageView photoURL;
+    String photofile;
+    DatabaseReference databaseReference;
 
 
     @Override
@@ -51,6 +62,7 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
         emailAdmin = findViewById(R.id.EmailAdmin);
         photoURL = findViewById(R.id.imageViewAdmin);
 
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
@@ -61,8 +73,6 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
-
-
 
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal,new Fragment_Inicio()).addToBackStack(null).commit();
@@ -82,18 +92,6 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
                 super.onBackPressed();
             }
 
-//            if (fragment instanceof Fragment_Inicio) {
-//                super.onBackPressed();
-//
-//            }else{
-//
-//                fragment = new Fragment_Inicio();
-//
-//                if (fragment != null) {
-//                    getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal, fragment).commit();
-//
-//                }
-//            }
         }
     }
 
@@ -126,31 +124,25 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if(id == R.id.nav_inicio){
+        if (id == R.id.nav_inicio) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal, new Fragment_Inicio()).addToBackStack(null).commit();
-        }else if (id == R.id.nav_cadastroUser) {
+        } else if (id == R.id.nav_cadastroUser) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal, new Fragment_Cadastro()).addToBackStack(null).commit();
         } else if (id == R.id.nav_listarUser) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal, new Fragment_ListarUser()).addToBackStack(null).commit();
-        } else if (id == R.id.nav_listarRelatorio) {
-           //Listar cada Relatorio Cadastrado por Usuario
-            Toast.makeText(this, "Listar Relatório", Toast.LENGTH_SHORT).show();
-            //getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal, new Fragment_ListarRelatorio()).commit();
-        } else if (id == R.id.nav_atualizarRelatorio) {
-            //Atualizar Relatorios
-            Toast.makeText(this, "Atualizar Relatório", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_excluirRelatorio) {
-            //Excluir Relatorios
-            Toast.makeText(this, "Excluir Relatório", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_sobre) {
+        } else if (id == R.id.nav_editarRelatorio) {
+            //Editar e Excluir relatorio
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal, new Fragment_EditarUsers()).commit();
+            //Toast.makeText(this, "Editar Tudo", Toast.LENGTH_SHORT).show();
+        } else if(id == R.id.nav_editarOrdenha){
+            Toast.makeText(this, "Atualização e Remoção da Ordenha", Toast.LENGTH_SHORT).show();
+        }else if (id == R.id.nav_sobre) {
             //Informações do Aplicativo
             Toast.makeText(this, "Informações Sobre o App e o Setor", Toast.LENGTH_SHORT).show();
-        } else if(id == R.id.nav_contato){
-            //Informações Sobre o Desenvolvedor do Aplicativo
-            Toast.makeText(this, "Contanto do Setor e do Desenvolvedor do App", Toast.LENGTH_SHORT).show();
         } else if(id == R.id.nav_sair){
             // Logout dos Usuários logados
-            Toast.makeText(this, "Deslogar da Conta do Usuário Logado (Admin ou User)", Toast.LENGTH_SHORT).show();
+            AuthUI.getInstance().signOut(this);
+            return true;
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -1,25 +1,25 @@
 package com.example.phnf2.projetounidadefinal.fragment;
 
-
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.phnf2.projetounidadefinal.Principal;
-import com.example.phnf2.projetounidadefinal.adapter.ListAdapter;
 import com.example.phnf2.projetounidadefinal.R;
+import com.example.phnf2.projetounidadefinal.adapter.EditarUsers;
+import com.example.phnf2.projetounidadefinal.adapter.ListAdapter;
 import com.example.phnf2.projetounidadefinal.adapter.RecyclerItemClickListener;
+import com.example.phnf2.projetounidadefinal.adapter.RecyclerOrdenhaClickListener;
 import com.example.phnf2.projetounidadefinal.modelo.Usuario;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,17 +29,16 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class Fragment_ListarUser extends Fragment {
+public class Fragment_EditarUsers extends Fragment {
 
-    public static List<Usuario> listUsuarios = new ArrayList<>();
-    RecyclerView listViewUsuario;
+
     DatabaseReference databaseUsuario;
+    public static List<Usuario> listUsuarios = new ArrayList<>();
+    RecyclerView recyclerViewListarUsuario;
     private FirebaseDatabase mFirebase;
+    ImageButton atualizarUsuario;
 
-    public Fragment_ListarUser() {
+    public Fragment_EditarUsers() {
         // Required empty public constructor
     }
 
@@ -48,12 +47,13 @@ public class Fragment_ListarUser extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_fragment__listar_user, container, false);
+        View view = inflater.inflate(R.layout.fragment_fragment__editar_users, container, false);
+
+        recyclerViewListarUsuario = view.findViewById(R.id.recyclerviewListarUsuarios);
+        atualizarUsuario = view.findViewById(R.id.AtualizarUser);
 
 
-        listViewUsuario = view.findViewById(R.id.ListViewUsuario);
-
-           mFirebase = FirebaseDatabase.getInstance();
+        mFirebase = FirebaseDatabase.getInstance();
 
         if(mFirebase == null) {
 
@@ -67,30 +67,30 @@ public class Fragment_ListarUser extends Fragment {
         }
 
 
-        listViewUsuario.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), listViewUsuario, new RecyclerItemClickListener.OnItemClickListener() {
+        recyclerViewListarUsuario.addOnItemTouchListener(new RecyclerOrdenhaClickListener(getContext(), recyclerViewListarUsuario, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
 
-                    @Override
-                    public void onItemClick(View view, int position) {
+                Usuario usuario2 = listUsuarios.get(position);
+                Fragment_EditarRelatorio fragment_editarRelatorio = new Fragment_EditarRelatorio(usuario2.getIdUser());
 
-                        Usuario user4 = listUsuarios.get(position);
-                        Fragment_ListarRelatorio fragment = new Fragment_ListarRelatorio(user4.getIdUser(),user4.getNomeUser());
-                        Toast.makeText(getContext(), "Nome:"+user4.getNomeUser(), Toast.LENGTH_SHORT).show();
-                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal,fragment).addToBackStack(null).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal,fragment_editarRelatorio).addToBackStack(null).commit();
 
-                    }
+            }
 
-                    @Override
-                    public void onItemLongClick(View view, int position) {
+            @Override
+            public void onItemLongClick(View view, int position) {
 
-                        Usuario user3 = listUsuarios.get(position);
-                        Toast.makeText(getContext(), "ID:"+user3.getIdUser() +"Nome:"+user3.getNomeUser(), Toast.LENGTH_SHORT).show();
+            }
+        }));
 
-                    }
-                })
-        );
+
+
+
 
         return view;
     }
+
 
     @Override
     public void onStart() {
@@ -111,11 +111,11 @@ public class Fragment_ListarUser extends Fragment {
                 }
 
                 ListAdapter adapter = new ListAdapter(getContext(), listUsuarios);
-                listViewUsuario.setAdapter(adapter);
+                recyclerViewListarUsuario.setAdapter(adapter);
 
                 RecyclerView.LayoutManager layout = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-                listViewUsuario.setLayoutManager(layout);
-                listViewUsuario.setItemAnimator(new DefaultItemAnimator());
+                recyclerViewListarUsuario.setLayoutManager(layout);
+                recyclerViewListarUsuario.setItemAnimator(new DefaultItemAnimator());
             }
 
             @Override
@@ -125,5 +125,6 @@ public class Fragment_ListarUser extends Fragment {
 
         });
     }
+
 
 }

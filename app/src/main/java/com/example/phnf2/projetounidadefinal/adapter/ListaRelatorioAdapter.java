@@ -10,21 +10,22 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.phnf2.projetounidadefinal.R;
 import com.example.phnf2.projetounidadefinal.fragment.Fragment_CadastroRelatorio;
-import com.example.phnf2.projetounidadefinal.modelo.Relatorio;
+import com.example.phnf2.projetounidadefinal.modelo.RelatorioProducaoLeite;
 
 import java.util.List;
 
 public class ListaRelatorioAdapter extends RecyclerView.Adapter {
 
     private Context context;
-    private List<Relatorio> listaRelatorio;
-    private Relatorio relatorioescolhido;
+    private List<RelatorioProducaoLeite> listaRelatorio;
+    private RelatorioProducaoLeite relatorioescolhido;
 
-    public ListaRelatorioAdapter(Context context, List<Relatorio> listaRelatorio) {
+    public ListaRelatorioAdapter(Context context, List<RelatorioProducaoLeite> listaRelatorio) {
         this.context = context;
         this.listaRelatorio = listaRelatorio;
     }
@@ -71,6 +72,7 @@ public class ListaRelatorioAdapter extends RecyclerView.Adapter {
             textViewTitulo2 = itemView.findViewById(R.id.textViewTitulo);
             textViewTipo2 = itemView.findViewById(R.id.textViewTipo);
             textViewData2 = itemView.findViewById(R.id.textViewData);
+
 
         }
     }

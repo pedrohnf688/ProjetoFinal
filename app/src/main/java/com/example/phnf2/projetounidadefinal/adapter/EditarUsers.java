@@ -1,30 +1,28 @@
 package com.example.phnf2.projetounidadefinal.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.phnf2.projetounidadefinal.R;
 import com.example.phnf2.projetounidadefinal.modelo.Usuario;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
-public class ListAdapter extends RecyclerView.Adapter {
+public class EditarUsers extends RecyclerView.Adapter {
 
     private Context context;
     private List<Usuario> listaUsuarios;
     Usuario usuarioescolhido;
 
-    public ListAdapter(Context context, List<Usuario> listaUsuarios) {
+    public EditarUsers(Context context, List<Usuario> listaUsuarios) {
         this.context = context;
         this.listaUsuarios = listaUsuarios;
     }
@@ -33,8 +31,8 @@ public class ListAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.list_users, parent, false);
-        ViewHolder holder = new ViewHolder(view);
+        View view = LayoutInflater.from(context).inflate(R.layout.editar_users, parent, false);
+        EditarUsers.ViewHolderEditar holder = new EditarUsers.ViewHolderEditar(view);
         return holder;
 
     }
@@ -42,12 +40,16 @@ public class ListAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
-        ViewHolder listT = (ViewHolder) holder;
+        EditarUsers.ViewHolderEditar listT = (EditarUsers.ViewHolderEditar) holder;
 
         usuarioescolhido = listaUsuarios.get(position);
 
-        listT.textViewNome2.setText(usuarioescolhido.getNomeUser());
-        listT.textViewEmail2.setText(usuarioescolhido.getEmailUser());
+        listT.NomeEditar.setText(usuarioescolhido.getNomeUser());
+        listT.EmailEditar.setText(usuarioescolhido.getEmailUser());
+
+
+
+
 
     }
 
@@ -57,16 +59,18 @@ public class ListAdapter extends RecyclerView.Adapter {
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolderEditar extends RecyclerView.ViewHolder {
 
-        final TextView textViewNome2;
-        final TextView textViewEmail2;
+        final TextView NomeEditar;
+        final TextView EmailEditar;
 
-        public ViewHolder(View v) {
+
+        public ViewHolderEditar(View v) {
             super(v);
 
-            textViewNome2 = v.findViewById(R.id.textViewNome);
-            textViewEmail2 = v.findViewById(R.id.textViewEmail);
+            NomeEditar = v.findViewById(R.id.NomeEditarUser);
+            EmailEditar = v.findViewById(R.id.EmailEditarUser);
+
 
         }
     }

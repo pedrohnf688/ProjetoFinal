@@ -18,13 +18,11 @@ import android.widget.Toast;
 import com.example.phnf2.projetounidadefinal.R;
 import com.example.phnf2.projetounidadefinal.adapter.ListAdapter;
 import com.example.phnf2.projetounidadefinal.adapter.ListaRelatorioAdapter;
-import com.example.phnf2.projetounidadefinal.modelo.Relatorio;
+import com.example.phnf2.projetounidadefinal.modelo.RelatorioProducaoLeite;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
@@ -103,7 +101,7 @@ public class Fragment_CadastroRelatorio extends Fragment {
 
             String idR = databaseRelatorios.push().getKey();
 
-            Relatorio rel = new Relatorio(idR, titulo3, tipo3, DataSistema());
+            RelatorioProducaoLeite rel = new RelatorioProducaoLeite(idR, titulo3, tipo3, DataSistema());
 
             databaseRelatorios.child(idR).setValue(rel);
 

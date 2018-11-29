@@ -15,41 +15,31 @@
             android:title="Cadastrar Usuário" />
         <item
             android:id="@+id/nav_listarUser"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_verification_of_delivery_list_clipboard_symbol"
             android:title="Listar Usuários" />
         <item
-            android:id="@+id/nav_cadastroRelatorio"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Cadastrar Relatório" />
+            android:id="@+id/nav_editarRelatorio"
+            android:icon="@drawable/ic_resume"
+            android:title="Editar Relatório" />
         <item
-            android:id="@+id/nav_listarRelatorio"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Listar Relatórios" />
-        <item
-            android:id="@+id/nav_atualizarRelatorio"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Atualizar Relatório" />
-        <item
-            android:id="@+id/nav_excluirRelatorio"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Excluir Relatórios" />
+            android:id="@+id/nav_editarOrdenha"
+            android:icon="@drawable/ic_resume"
+            android:title="Editar Ordenha" />
+
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Informações">
         <menu>
             <item
                 android:id="@+id/nav_sobre"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_care_about_environment"
                 android:title="Sobre" />
-            <item
-                android:id="@+id/nav_contato"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Contato" />
+
         </menu>
     </item>
 
     <item
         android:id="@+id/nav_sair"
-        android:icon="@drawable/ic_menu_manage"
+        android:icon="@drawable/ic_logout"
         android:title="Sair" />
 </menu>

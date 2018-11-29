@@ -1,16 +1,16 @@
 package com.example.phnf2.projetounidadefinal.modelo;
 
-public class Relatorio {
+public class RelatorioProducaoLeite {
 
     private String IdRelatorio;
     private String TituloRelatorio;
     private String TipoRelatorio;
     private String DataRelatorio;
 
-    public Relatorio() {
+    public RelatorioProducaoLeite() {
     }
 
-    public Relatorio(String idRelatorio, String tituloRelatorio, String tipoRelatorio, String dataRelatorio) {
+    public RelatorioProducaoLeite(String idRelatorio, String tituloRelatorio, String tipoRelatorio, String dataRelatorio) {
         IdRelatorio = idRelatorio;
         TituloRelatorio = tituloRelatorio;
         TipoRelatorio = tipoRelatorio;

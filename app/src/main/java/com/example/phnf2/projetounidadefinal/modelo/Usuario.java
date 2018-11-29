@@ -5,16 +5,16 @@ public class Usuario {
     private String IdUser;
     private String NomeUser;
     private String EmailUser;
-    private String SenhaUser;
+    private String PhotoUser;
 
     public Usuario() {
     }
 
-    public Usuario(String idUser, String nomeUser, String emailUser, String senhaUser) {
+    public Usuario(String idUser, String nomeUser, String emailUser, String PhotoUser) {
         IdUser = idUser;
         NomeUser = nomeUser;
         EmailUser = emailUser;
-        SenhaUser = senhaUser;
+        PhotoUser = PhotoUser;
     }
 
     public String getIdUser() {
@@ -41,11 +41,11 @@ public class Usuario {
         EmailUser = emailUser;
     }
 
-    public String getSenhaUser() {
-        return SenhaUser;
+    public String getPhotoUser() {
+        return PhotoUser;
     }
 
-    public void setSenhaUser(String senhaUser) {
-        SenhaUser = senhaUser;
+    public void setPhotoUser(String PhotoUser) {
+        PhotoUser = PhotoUser;
     }
 }

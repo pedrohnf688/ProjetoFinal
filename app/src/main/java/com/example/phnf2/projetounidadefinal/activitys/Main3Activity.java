@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.phnf2.projetounidadefinal.R;
-import com.example.phnf2.projetounidadefinal.modelo.Relatorio;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
