@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.phnf2.projetounidadefinal.fragment.Fragment_Cadastro;
 import com.example.phnf2.projetounidadefinal.fragment.Fragment_CadastroRelatorio;
+import com.example.phnf2.projetounidadefinal.fragment.Fragment_EditarUserOrdenha;
 import com.example.phnf2.projetounidadefinal.fragment.Fragment_EditarUsers;
 import com.example.phnf2.projetounidadefinal.fragment.Fragment_Inicio;
 import com.example.phnf2.projetounidadefinal.fragment.Fragment_ListarRelatorio;
@@ -135,7 +136,9 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal, new Fragment_EditarUsers()).commit();
             //Toast.makeText(this, "Editar Tudo", Toast.LENGTH_SHORT).show();
         } else if(id == R.id.nav_editarOrdenha){
-            Toast.makeText(this, "Atualização e Remoção da Ordenha", Toast.LENGTH_SHORT).show();
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal,new Fragment_EditarUserOrdenha()).addToBackStack(null).commit();
+//            Toast.makeText(this, "Atualização e Remoção da Ordenha", Toast.LENGTH_SHORT).show();
         }else if (id == R.id.nav_sobre) {
             //Informações do Aplicativo
             Toast.makeText(this, "Informações Sobre o App e o Setor", Toast.LENGTH_SHORT).show();

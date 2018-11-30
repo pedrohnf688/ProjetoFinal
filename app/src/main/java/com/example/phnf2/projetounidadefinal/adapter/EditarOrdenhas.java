@@ -9,8 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.phnf2.projetounidadefinal.R;
+import com.example.phnf2.projetounidadefinal.fragment.Fragment_EditarOrdenha;
 import com.example.phnf2.projetounidadefinal.modelo.Ordenha;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -59,12 +61,21 @@ public class EditarOrdenhas extends RecyclerView.Adapter {
         viewHolderOrdenha.removerOrdenha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                DatabaseReference drRelatorio = FirebaseDatabase.getInstance().getReference("Relatorios").child(ordenhaescolhida.getIdOrdenha());
-//                DatabaseReference drOrdenha = FirebaseDatabase.getInstance().getReference("Ordenhas").child(ordenhaescolhida.getIdOrdenha());
-//
-//
-//                drRelatorio.removeValue();
-//                drOrdenha.removeValue();
+
+                Fragment_EditarOrdenha FEditarOrdenha = new Fragment_EditarOrdenha();
+
+                DatabaseReference databaseordenha = FirebaseDatabase.getInstance().getReference("Ordenhas").child(FEditarOrdenha.getOrdenhaID()).child(ordenhaescolhida.getIdOrdenha());
+
+                databaseordenha.removeValue();
+
+            }
+        });
+
+        viewHolderOrdenha.atualizarOrdenha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(context, "Atualizar Ordenha", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -88,6 +99,7 @@ public class EditarOrdenhas extends RecyclerView.Adapter {
         final TextView textViewCel2;
         final TextView textViewCcs2;
         final ImageButton removerOrdenha;
+        final ImageButton atualizarOrdenha;
 
 
         public ViewHolderOrdenhaEditar(@NonNull View itemView) {
@@ -103,6 +115,7 @@ public class EditarOrdenhas extends RecyclerView.Adapter {
             textViewCel2 = itemView.findViewById(R.id.textViewCelEditar);
             textViewCcs2 = itemView.findViewById(R.id.textViewCcsEditar);
             removerOrdenha = itemView.findViewById(R.id.OrdenhaRemover);
+            atualizarOrdenha = itemView.findViewById(R.id.atualizarOrdenha);
 
         }
     }

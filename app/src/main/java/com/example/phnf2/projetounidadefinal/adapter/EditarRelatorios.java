@@ -15,9 +15,12 @@ import com.example.phnf2.projetounidadefinal.R;
 import com.example.phnf2.projetounidadefinal.fragment.Fragment_EditarRelatorio;
 import com.example.phnf2.projetounidadefinal.fragment.Fragment_EditarUsers;
 import com.example.phnf2.projetounidadefinal.modelo.RelatorioProducaoLeite;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -62,7 +65,7 @@ public class EditarRelatorios extends RecyclerView.Adapter {
                 Fragment_EditarRelatorio fragment = new Fragment_EditarRelatorio();
 
                 Toast.makeText(context, "Remover", Toast.LENGTH_SHORT).show();
-                DatabaseReference databaserelatorio = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Relatorios").child(fragment.idString()).orderByChild("idRelatorio").equalTo(relatorioescolhido.getIdRelatorio());
+                DatabaseReference databaserelatorio = FirebaseDatabase.getInstance().getReference("Relatorios").child(fragment.idString()).child(relatorioescolhido.getIdRelatorio());
                 DatabaseReference databaseOrdenha = FirebaseDatabase.getInstance().getReference("Ordenhas").child(relatorioescolhido.getIdRelatorio());
 
                 databaserelatorio.removeValue();

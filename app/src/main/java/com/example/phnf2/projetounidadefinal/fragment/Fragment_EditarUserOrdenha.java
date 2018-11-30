@@ -11,11 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.example.phnf2.projetounidadefinal.R;
-import com.example.phnf2.projetounidadefinal.adapter.EditarUsers;
 import com.example.phnf2.projetounidadefinal.adapter.ListAdapter;
 import com.example.phnf2.projetounidadefinal.adapter.RecyclerItemClickListener;
 import com.example.phnf2.projetounidadefinal.adapter.RecyclerOrdenhaClickListener;
@@ -29,27 +26,29 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Fragment_EditarUsers extends Fragment {
+public class Fragment_EditarUserOrdenha extends Fragment {
 
 
     DatabaseReference databaseUsuario;
     public static List<Usuario> listUsuarios = new ArrayList<>();
-    RecyclerView recyclerViewListarUsuario;
+    RecyclerView recyclerEditarUserOrdenha;
     private FirebaseDatabase mFirebase;
 
-    public Fragment_EditarUsers() {
+    public Fragment_EditarUserOrdenha() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_fragment__editar_users, container, false);
+        View view = inflater.inflate(R.layout.fragment_fragment__editar_user_ordenha, container, false);
 
-        recyclerViewListarUsuario = view.findViewById(R.id.recyclerviewListarUsuarios);
+        /*
+        Acessar Usuarios --> Acessar Relatorios --> Editar Ordenhas
+         */
 
+        recyclerEditarUserOrdenha = view.findViewById(R.id.recyclerEditarUserOrdenha);
 
         mFirebase = FirebaseDatabase.getInstance();
 
@@ -65,12 +64,14 @@ public class Fragment_EditarUsers extends Fragment {
         }
 
 
-        recyclerViewListarUsuario.addOnItemTouchListener(new RecyclerOrdenhaClickListener(getContext(), recyclerViewListarUsuario, new RecyclerItemClickListener.OnItemClickListener() {
+
+
+        recyclerEditarUserOrdenha.addOnItemTouchListener(new RecyclerOrdenhaClickListener(getContext(), recyclerEditarUserOrdenha, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
 
                 Usuario usuario2 = listUsuarios.get(position);
-                Fragment_EditarRelatorio fragment_editarRelatorio = new Fragment_EditarRelatorio(usuario2.getIdUser());
+                Fragment_AtualizarRelatorio fragment_editarRelatorio = new Fragment_AtualizarRelatorio(usuario2.getIdUser());
 
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal,fragment_editarRelatorio).addToBackStack(null).commit();
 
@@ -81,7 +82,6 @@ public class Fragment_EditarUsers extends Fragment {
 
             }
         }));
-
 
 
 
@@ -109,11 +109,11 @@ public class Fragment_EditarUsers extends Fragment {
                 }
 
                 ListAdapter adapter = new ListAdapter(getContext(), listUsuarios);
-                recyclerViewListarUsuario.setAdapter(adapter);
+                recyclerEditarUserOrdenha.setAdapter(adapter);
 
                 RecyclerView.LayoutManager layout = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-                recyclerViewListarUsuario.setLayoutManager(layout);
-                recyclerViewListarUsuario.setItemAnimator(new DefaultItemAnimator());
+                recyclerEditarUserOrdenha.setLayoutManager(layout);
+                recyclerEditarUserOrdenha.setItemAnimator(new DefaultItemAnimator());
             }
 
             @Override
@@ -125,4 +125,7 @@ public class Fragment_EditarUsers extends Fragment {
     }
 
 
+
+
 }
+

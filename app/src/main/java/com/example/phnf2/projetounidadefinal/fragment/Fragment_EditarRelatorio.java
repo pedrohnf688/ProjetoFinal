@@ -61,8 +61,7 @@ public class Fragment_EditarRelatorio extends Fragment {
 
         recyclerViewRelatorioEditar = view.findViewById(R.id.recyclerViewListarRelatorios);
 
-
-         databaseRelatorioEditar = FirebaseDatabase.getInstance().getReference("Relatorios").child(id);
+        databaseRelatorioEditar = FirebaseDatabase.getInstance().getReference("Relatorios").child(id);
 
 
 
