@@ -8,6 +8,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -34,6 +36,7 @@ import com.example.phnf2.projetounidadefinal.util.FirebaseUtil;
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -47,34 +50,64 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
     private Fragment fragment;
     TextView nomeAdmin;
     TextView emailAdmin;
-    ImageView photoURL;
-    String photofile;
-    DatabaseReference databaseReference;
-
+    CircleImageView photoURL;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    String nome;
+    String email;
+    String photo;
+    DatabaseReference databaseUsuario;
+    private FirebaseDatabase mFirebase;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        nomeAdmin = findViewById(R.id.NomeAdmin);
-        emailAdmin = findViewById(R.id.EmailAdmin);
-        photoURL = findViewById(R.id.imageViewAdmin);
-
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView.setNavigationItemSelectedListener(this);
 
+        mFirebase = FirebaseDatabase.getInstance();
+        databaseUsuario = mFirebase.getReference("Admininstrador");
+
+        nomeAdmin = navigationView.getHeaderView(0).findViewById(R.id.NomeAdmin);
+        emailAdmin = navigationView.getHeaderView(0).findViewById(R.id.EmailAdmin);
+        photoURL = navigationView.getHeaderView(0).findViewById(R.id.imageViewAdmin);
+
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        try {
+
+
+        nome = user.getDisplayName();
+        email = user.getEmail();
+        photo = user.getPhotoUrl().toString();
+        nomeAdmin.setText(nome);
+        emailAdmin.setText(email);
+        FirebaseUtil.loadProfileIcon(photo,photoURL);
+
+        if(!TextUtils.isEmpty(nome) && !TextUtils.isEmpty(email)) {
+            Administrador administrador = new Administrador(FirebaseUtil.getAdministrador().getIdAdmin(), nome,photo,email);
+            databaseUsuario.child(FirebaseUtil.getAdministrador().getIdAdmin()).setValue(administrador);
+        }
+
+
+        }catch (NullPointerException e){
+            Log.i("Erro Pedro",e.getMessage());
+        }
+
+
+        navigationView.setNavigationItemSelectedListener(this);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal,new Fragment_Inicio()).addToBackStack(null).commit();
 
@@ -126,17 +159,22 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
         int id = item.getItemId();
 
         if (id == R.id.nav_inicio) {
+
+            toolbar.setTitle("Início");
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal, new Fragment_Inicio()).addToBackStack(null).commit();
         } else if (id == R.id.nav_cadastroUser) {
+            toolbar.setTitle("Cadastro do Usuário");
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal, new Fragment_Cadastro()).addToBackStack(null).commit();
         } else if (id == R.id.nav_listarUser) {
+            toolbar.setTitle("Listar e Cadastrar Dados");
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal, new Fragment_ListarUser()).addToBackStack(null).commit();
         } else if (id == R.id.nav_editarRelatorio) {
             //Editar e Excluir relatorio
+            toolbar.setTitle("Editar Relatório");
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal, new Fragment_EditarUsers()).commit();
             //Toast.makeText(this, "Editar Tudo", Toast.LENGTH_SHORT).show();
         } else if(id == R.id.nav_editarOrdenha){
-
+            toolbar.setTitle("Editar Ordenha");
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal,new Fragment_EditarUserOrdenha()).addToBackStack(null).commit();
 //            Toast.makeText(this, "Atualização e Remoção da Ordenha", Toast.LENGTH_SHORT).show();
         }else if (id == R.id.nav_sobre) {
@@ -151,6 +189,7 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
 
 

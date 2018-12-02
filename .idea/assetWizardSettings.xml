@@ -29,8 +29,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_edit" />
-                            <entry key="sourceFile" value="C:\Users\phnf2\Downloads\edit.svg" />
+                            <entry key="outputName" value="ic_rubbish_bin_delete_button" />
+                            <entry key="sourceFile" value="C:\Users\phnf2\Downloads\rubbish-bin-delete-button.svg" />
                           </map>
                         </option>
                       </PersistentState>

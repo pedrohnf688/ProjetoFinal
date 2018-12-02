@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.phnf2.projetounidadefinal.R;
 import com.example.phnf2.projetounidadefinal.modelo.Ordenha;
@@ -22,10 +23,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.ValueDependentColor;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
+import com.jjoe64.graphview.series.OnDataPointTapListener;
+import com.jjoe64.graphview.series.Series;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +50,6 @@ public class Fragment_GraficoOrdenha extends Fragment {
     DatabaseReference databaseOrdenha;
     FirebaseDatabase mFirebase;
     BarGraphSeries<DataPoint> graphSeriesBar;
-    LineGraphSeries<DataPoint> graphSeriesLinear;
     Query query;
 
     @SuppressLint("ValidFragment")
@@ -73,24 +77,18 @@ public class Fragment_GraficoOrdenha extends Fragment {
 
         }else{
             query = mFirebase.getReference("Ordenhas").child(id).orderByChild("idOrdenha").equalTo(kId);
-//            databaseOrdenha = mFirebase.getReference("Ordenhas").child(id);
             query.keepSynced(true);
         }
 
         graphSeriesBar = new BarGraphSeries<>();
-        graphSeriesLinear = new LineGraphSeries<>();
 
         graphView.addSeries(graphSeriesBar);
-        //graphView.addSeries(graphSeriesLinear);
-
-        //graphSeriesLinear.setColor(Color.rgb (255, 102, 255));
 
         graphSeriesBar.setDrawValuesOnTop(true);
 
         graphSeriesBar.setValuesOnTopColor(Color.RED);
 
-        graphSeriesBar.setSpacing(50);
-        //graphSeriesLinear.setColor(Color.RED);
+        graphSeriesBar.setSpacing(40);
 
         graphSeriesBar.setValueDependentColor(new ValueDependentColor<DataPoint>() {
             @Override
@@ -108,6 +106,41 @@ public class Fragment_GraficoOrdenha extends Fragment {
         graphView.getViewport().setMaxY(100);
 
 
+
+        graphSeriesBar.setTitle("Variáveis da Ordenha");
+
+        graphView.getLegendRenderer().setVisible(true);
+        graphView.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+
+
+        graphSeriesBar.setOnDataPointTapListener(new OnDataPointTapListener() {
+            @Override
+            public void onTap(Series series, DataPointInterface dataPoint) {
+
+                if(dataPoint.getX() == 0){
+                    Toast.makeText(getActivity(), "Gráfico: Barra de Gor: "+dataPoint, Toast.LENGTH_SHORT).show();
+                }else if(dataPoint.getX() == 1){
+                    Toast.makeText(getActivity(), "Gráfico: Barra de Prot: "+dataPoint, Toast.LENGTH_SHORT).show();
+                }else if(dataPoint.getX() == 2){
+                    Toast.makeText(getActivity(), "Gráfico: Barra de Cas: "+dataPoint, Toast.LENGTH_SHORT).show();
+                }else if(dataPoint.getX() == 3){
+                    Toast.makeText(getActivity(), "Gráfico: Barra de Lact: "+dataPoint, Toast.LENGTH_SHORT).show();
+                }else if(dataPoint.getX() == 4){
+                    Toast.makeText(getActivity(), "Gráfico: Barra de St: "+dataPoint, Toast.LENGTH_SHORT).show();
+                }else if(dataPoint.getX() == 5){
+                    Toast.makeText(getActivity(), "Gráfico: Barra de Esd: "+dataPoint, Toast.LENGTH_SHORT).show();
+                }else if(dataPoint.getX() == 6){
+                    Toast.makeText(getActivity(), "Gráfico: Barra de Nu: "+dataPoint, Toast.LENGTH_SHORT).show();
+                }else if(dataPoint.getX() == 7){
+                    Toast.makeText(getActivity(), "Gráfico: Barra de Cel: "+dataPoint, Toast.LENGTH_SHORT).show();
+                }else if(dataPoint.getX() == 8) {
+                    Toast.makeText(getActivity(), "Gráfico: Barra de Ccs: " + dataPoint, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+
         return view;
 
     }
@@ -123,7 +156,6 @@ public class Fragment_GraficoOrdenha extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 DataPoint[] dpBar = new DataPoint[9];
-                //DataPoint[] dpLinear = new DataPoint[1];
                 double gord = 0, prot = 0, cas = 0, lact = 0, st = 0, esd = 0, nu = 0, cel = 0, ccs = 0;
                 List<Double> doubleList = new ArrayList<>();
 
@@ -141,8 +173,6 @@ public class Fragment_GraficoOrdenha extends Fragment {
                     cel = ordenha.getCel();
                     ccs = ordenha.getCcs();
 
-                    //dpLinear[0] = new DataPoint(0,ccs);
-
                 }
 
                 doubleList.add(gord);
@@ -155,7 +185,6 @@ public class Fragment_GraficoOrdenha extends Fragment {
                 doubleList.add(cel);
                 doubleList.add(ccs);
 
-
                 Log.i("Size","Tamanho:"+doubleList.size());
 
                 for(int i=0;i<doubleList.size();i++){
@@ -163,9 +192,7 @@ public class Fragment_GraficoOrdenha extends Fragment {
 
                 }
 
-
                 graphSeriesBar.resetData(dpBar);
-                //graphSeriesLinear.resetData(dpLinear);
             }
 
             @Override

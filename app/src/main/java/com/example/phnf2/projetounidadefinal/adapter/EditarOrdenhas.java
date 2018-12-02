@@ -58,26 +58,26 @@ public class EditarOrdenhas extends RecyclerView.Adapter {
         viewHolderOrdenha.textViewCel2.setText(""+ordenhaescolhida.getCel());
         viewHolderOrdenha.textViewCcs2.setText(""+ordenhaescolhida.getCcs());
 
-        viewHolderOrdenha.removerOrdenha.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//        viewHolderOrdenha.removerOrdenha.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Fragment_EditarOrdenha FEditarOrdenha = new Fragment_EditarOrdenha();
+//
+//                DatabaseReference databaseordenha = FirebaseDatabase.getInstance().getReference("Ordenhas").child(FEditarOrdenha.getOrdenhaID()).child(ordenhaescolhida.getIdOrdenha());
+//
+//                databaseordenha.removeValue();
+//
+//            }
+//        });
 
-                Fragment_EditarOrdenha FEditarOrdenha = new Fragment_EditarOrdenha();
-
-                DatabaseReference databaseordenha = FirebaseDatabase.getInstance().getReference("Ordenhas").child(FEditarOrdenha.getOrdenhaID()).child(ordenhaescolhida.getIdOrdenha());
-
-                databaseordenha.removeValue();
-
-            }
-        });
-
-        viewHolderOrdenha.atualizarOrdenha.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Toast.makeText(context, "Atualizar Ordenha", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        viewHolderOrdenha.atualizarOrdenha.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Toast.makeText(context, "Atualizar Ordenha", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
 
     }
@@ -98,8 +98,6 @@ public class EditarOrdenhas extends RecyclerView.Adapter {
         final TextView textViewNu2;
         final TextView textViewCel2;
         final TextView textViewCcs2;
-        final ImageButton removerOrdenha;
-        final ImageButton atualizarOrdenha;
 
 
         public ViewHolderOrdenhaEditar(@NonNull View itemView) {
@@ -114,8 +112,6 @@ public class EditarOrdenhas extends RecyclerView.Adapter {
             textViewNu2 = itemView.findViewById(R.id.textViewNuEditar);
             textViewCel2 = itemView.findViewById(R.id.textViewCelEditar);
             textViewCcs2 = itemView.findViewById(R.id.textViewCcsEditar);
-            removerOrdenha = itemView.findViewById(R.id.OrdenhaRemover);
-            atualizarOrdenha = itemView.findViewById(R.id.atualizarOrdenha);
 
         }
     }
