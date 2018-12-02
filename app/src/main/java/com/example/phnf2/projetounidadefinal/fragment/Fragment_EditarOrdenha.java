@@ -161,6 +161,7 @@ public class Fragment_EditarOrdenha extends Fragment {
                         DatabaseReference databaseordenha = FirebaseDatabase.getInstance().getReference("Ordenhas").child(getOrdenhaID()).child(ordenhaEcolhida.getIdOrdenha());
                         databaseordenha.removeValue();
 
+                        alertDialog.dismiss();
                     }
                 });
 
