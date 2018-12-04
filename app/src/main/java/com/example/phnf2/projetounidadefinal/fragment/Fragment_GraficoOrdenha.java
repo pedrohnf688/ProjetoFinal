@@ -44,7 +44,6 @@ import static com.example.phnf2.projetounidadefinal.util.FirebaseUtil.getCurrent
 public class Fragment_GraficoOrdenha extends Fragment {
 
     GraphView graphView;
-    Button GerarPdf;
     String id;
     String kId;
     DatabaseReference databaseOrdenha;
@@ -67,7 +66,6 @@ public class Fragment_GraficoOrdenha extends Fragment {
 
 
         graphView = view.findViewById(R.id.GraficoOrdenha);
-        GerarPdf = view.findViewById(R.id.buttonGerarPdf);
 
         mFirebase = FirebaseDatabase.getInstance();
 

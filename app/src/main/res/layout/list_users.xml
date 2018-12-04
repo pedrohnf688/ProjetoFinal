@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:text="Nome:"
             android:textStyle="bold"
+            android:paddingLeft="20dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
         <TextView
             android:id="@+id/MostrarEmail"
@@ -35,6 +36,7 @@
             android:layout_height="wrap_content"
             android:text="Email:"
             android:textStyle="bold"
+            android:paddingLeft="20dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
     </LinearLayout>
     <LinearLayout

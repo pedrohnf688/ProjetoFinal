@@ -31,6 +31,7 @@ import com.example.phnf2.projetounidadefinal.fragment.Fragment_EditarUsers;
 import com.example.phnf2.projetounidadefinal.fragment.Fragment_Inicio;
 import com.example.phnf2.projetounidadefinal.fragment.Fragment_ListarRelatorio;
 import com.example.phnf2.projetounidadefinal.fragment.Fragment_ListarUser;
+import com.example.phnf2.projetounidadefinal.fragment.Fragment_Sobre;
 import com.example.phnf2.projetounidadefinal.modelo.Administrador;
 import com.example.phnf2.projetounidadefinal.util.FirebaseUtil;
 import com.firebase.ui.auth.AuthUI;
@@ -75,6 +76,8 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        Menu kkkk = navigationView.getMenu();
+        kkkk.findItem(R.id.nav_cadastroUser).setVisible(false);
 
         mFirebase = FirebaseDatabase.getInstance();
         databaseUsuario = mFirebase.getReference("Admininstrador");
@@ -88,24 +91,19 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
 
         try {
 
+            nome = user.getDisplayName();
+            email = user.getEmail();
+            photo = user.getPhotoUrl() != null ? user.getPhotoUrl().toString() : null;
+            nomeAdmin.setText(nome);
+            emailAdmin.setText(email);
+            FirebaseUtil.loadProfileIcon(photo,photoURL);
 
-        nome = user.getDisplayName();
-        email = user.getEmail();
-        photo = user.getPhotoUrl().toString();
-        nomeAdmin.setText(nome);
-        emailAdmin.setText(email);
-        FirebaseUtil.loadProfileIcon(photo,photoURL);
-
-        if(!TextUtils.isEmpty(nome) && !TextUtils.isEmpty(email)) {
             Administrador administrador = new Administrador(FirebaseUtil.getAdministrador().getIdAdmin(), nome,photo,email);
             databaseUsuario.child(FirebaseUtil.getAdministrador().getIdAdmin()).setValue(administrador);
-        }
-
 
         }catch (NullPointerException e){
             Log.i("Erro Pedro",e.getMessage());
         }
-
 
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -132,7 +130,7 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.principal, menu);
+//        getMenuInflater().inflate(R.menu.principal, menu);
         return true;
     }
 
@@ -141,13 +139,13 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            AuthUI.getInstance().signOut(this);
-            return true;
-        }
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            AuthUI.getInstance().signOut(this);
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -179,11 +177,13 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
 //            Toast.makeText(this, "Atualização e Remoção da Ordenha", Toast.LENGTH_SHORT).show();
         }else if (id == R.id.nav_sobre) {
             //Informações do Aplicativo
-            Toast.makeText(this, "Informações Sobre o App e o Setor", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Informações Sobre o App e o Setor", Toast.LENGTH_SHORT).show();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal,new Fragment_Sobre()).addToBackStack(null).commit();
         } else if(id == R.id.nav_sair){
             // Logout dos Usuários logados
             AuthUI.getInstance().signOut(this);
-            return true;
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal,new Fragment_Inicio()).addToBackStack(null).commit();
+//            return true;
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

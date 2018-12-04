@@ -22,7 +22,9 @@ import com.example.phnf2.projetounidadefinal.modelo.RelatorioProducaoLeite;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
@@ -40,6 +42,7 @@ public class Fragment_CadastroRelatorio extends Fragment {
     String id;
     String nome;
     private FirebaseDatabase mFirebase;
+    Date date;
 
     @SuppressLint("ValidFragment")
     public Fragment_CadastroRelatorio(String id,String nome) {
@@ -117,11 +120,16 @@ public class Fragment_CadastroRelatorio extends Fragment {
     }
 
     private String DataSistema() {
-        Locale locale = new Locale("pt", "BR");
-        GregorianCalendar calendar = new GregorianCalendar();
-        SimpleDateFormat formatador = new SimpleDateFormat("dd' de 'MMMMM' de 'yyyy' - 'HH':'mm'h'", locale);
+//        Locale locale = new Locale("pt", "BR");
+//        GregorianCalendar calendar = new GregorianCalendar();
+//        SimpleDateFormat formatador = new SimpleDateFormat("dd' de 'MMMMM' de 'yyyy' - 'HH':'mm'h'", locale);
 
-        return formatador.format(calendar.getTime());
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        date = new Date();
+        String dataMensagem = dateFormat.format(date);
+
+
+        return dataMensagem;
     }
 
 }

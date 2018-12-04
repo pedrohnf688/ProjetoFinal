@@ -12,12 +12,25 @@
         android:id="@+id/textViewStatus"
         android:layout_width="227dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="184dp"
-        android:layout_marginEnd="64dp"
-        android:text="Fragment Inicial"
+        android:layout_marginTop="69dp"
+        android:layout_marginBottom="56dp"
+        android:text=""
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/fotoInicio1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/fotoInicio1"
+        android:layout_width="234dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="155dp"
+        android:src="@drawable/ic_cowinicio"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewStatus" />
 
 </android.support.constraint.ConstraintLayout>

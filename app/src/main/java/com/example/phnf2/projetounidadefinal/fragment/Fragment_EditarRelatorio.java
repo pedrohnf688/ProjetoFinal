@@ -33,8 +33,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
@@ -159,11 +161,15 @@ public class Fragment_EditarRelatorio extends Fragment {
 
 
     private String DataSistema() {
-        Locale locale = new Locale("pt", "BR");
-        GregorianCalendar calendar = new GregorianCalendar();
-        SimpleDateFormat formatador = new SimpleDateFormat("dd' de 'MMMMM' de 'yyyy' - 'HH':'mm'h'", locale);
+//        Locale locale = new Locale("pt", "BR");
+//        GregorianCalendar calendar = new GregorianCalendar();
+//        SimpleDateFormat formatador = new SimpleDateFormat("dd' de 'MMMMM' de 'yyyy' - 'HH':'mm'h'", locale);
 
-        return formatador.format(calendar.getTime());
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        String dataMensagem = dateFormat.format(date);
+
+        return dataMensagem;
     }
 
 
