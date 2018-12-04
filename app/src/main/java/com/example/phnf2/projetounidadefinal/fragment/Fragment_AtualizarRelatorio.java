@@ -85,9 +85,9 @@ public class Fragment_AtualizarRelatorio extends Fragment {
             @Override
             public void onItemLongClick(View view, int position) {
 
-                RelatorioProducaoLeite relatorio3 = listRelatorio.get(position);
-                Toast.makeText(getContext(), "ID:"+relatorio3.getIdRelatorio(), Toast.LENGTH_SHORT).show();
-
+                /*
+                Testes
+                 */
             }
         }));
 

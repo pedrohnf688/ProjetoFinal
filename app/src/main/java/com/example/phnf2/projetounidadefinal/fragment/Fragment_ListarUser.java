@@ -82,9 +82,9 @@ public class Fragment_ListarUser extends Fragment {
                     @Override
                     public void onItemLongClick(View view, int position) {
 
-                        Usuario user3 = listUsuarios.get(position);
-                        Toast.makeText(getContext(), "ID:"+user3.getIdUser() +"Nome:"+user3.getNomeUser(), Toast.LENGTH_SHORT).show();
-
+                        /*
+                        teste
+                         */
                     }
                 })
         );

@@ -178,6 +178,7 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
         }else if (id == R.id.nav_sobre) {
             //Informações do Aplicativo
 //            Toast.makeText(this, "Informações Sobre o App e o Setor", Toast.LENGTH_SHORT).show();
+           toolbar.setTitle("Sobre");
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal,new Fragment_Sobre()).addToBackStack(null).commit();
         } else if(id == R.id.nav_sair){
             // Logout dos Usuários logados

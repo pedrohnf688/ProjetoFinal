@@ -107,8 +107,9 @@ public class Fragment_ListarRelatorio extends Fragment {
             @Override
             public void onItemLongClick(View view, int position) {
 
-                RelatorioProducaoLeite relatorio3 = listarRelatorios.get(position);
-                Toast.makeText(getContext(), "ID:"+relatorio3.getIdRelatorio()+"TItulo:"+relatorio3.getTituloRelatorio(), Toast.LENGTH_SHORT).show();
+              /*
+              teste
+               */
 
             }
         }));

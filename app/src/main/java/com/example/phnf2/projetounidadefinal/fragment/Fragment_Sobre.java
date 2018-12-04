@@ -23,6 +23,8 @@ public class Fragment_Sobre extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_fragment__sobre, container, false);
+        
+
         return view;
     }
 

@@ -64,10 +64,6 @@ public class Fragment_CadastroRelatorio extends Fragment {
         tipo2 = view.findViewById(R.id.tipo);
         buttonaddRelatorio = view.findViewById(R.id.buttonaddRelatorio);
 
-
-        Log.i("ID", "ID:" + id + "NOME:" + nome);
-        Toast.makeText(getContext(), "ID:" + id + "NOME:" + nome, Toast.LENGTH_SHORT).show();
-
         nomeVisualizar.setText(nome);
 
 
