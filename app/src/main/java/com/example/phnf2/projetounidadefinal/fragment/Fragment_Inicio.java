@@ -81,6 +81,7 @@ public class Fragment_Inicio extends Fragment {
                             AuthUI.getInstance()
                                     .createSignInIntentBuilder()
                                     .setIsSmartLockEnabled(false)
+                                    .setLogo(R.drawable.dd)
                                     .setAvailableProviders(
                                             Arrays.asList(
                                                     new AuthUI.IdpConfig.GoogleBuilder().build(),
