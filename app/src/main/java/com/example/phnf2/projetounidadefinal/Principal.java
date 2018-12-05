@@ -122,6 +122,7 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
                 getSupportFragmentManager().popBackStack();
             }else{
                 super.onBackPressed();
+//                this.finish();
             }
 
         }
