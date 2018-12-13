@@ -76,6 +76,7 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+
         Menu kkkk = navigationView.getMenu();
         kkkk.findItem(R.id.nav_cadastroUser).setVisible(false);
 
@@ -107,6 +108,7 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
 
         navigationView.setNavigationItemSelectedListener(this);
 
+
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal,new Fragment_Inicio()).addToBackStack(null).commit();
 
     }
@@ -122,8 +124,8 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
                 getSupportFragmentManager().popBackStack();
             }else{
                 super.onBackPressed();
-//                this.finish();
             }
+
 
         }
     }
@@ -170,7 +172,7 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
         } else if (id == R.id.nav_editarRelatorio) {
             //Editar e Excluir relatorio
             toolbar.setTitle("Editar Relatório");
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal, new Fragment_EditarUsers()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal, new Fragment_EditarUsers()).addToBackStack(null).commit();
             //Toast.makeText(this, "Editar Tudo", Toast.LENGTH_SHORT).show();
         } else if(id == R.id.nav_editarOrdenha){
             toolbar.setTitle("Editar Ordenha");

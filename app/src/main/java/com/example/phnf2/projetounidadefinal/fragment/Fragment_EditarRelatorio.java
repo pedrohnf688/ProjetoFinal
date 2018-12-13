@@ -48,12 +48,12 @@ import java.util.Locale;
 public class Fragment_EditarRelatorio extends Fragment {
 
     static String id;
-
     RecyclerView recyclerViewRelatorioEditar;
     DatabaseReference databaseRelatorioEditar;
     DatabaseReference databaseOrdenhaEditar;
     List<RelatorioProducaoLeite> relatorioProducaoList = new ArrayList<>();
     DatabaseReference drOrdenha;
+
 
     @SuppressLint("ValidFragment")
     public Fragment_EditarRelatorio(String id) {

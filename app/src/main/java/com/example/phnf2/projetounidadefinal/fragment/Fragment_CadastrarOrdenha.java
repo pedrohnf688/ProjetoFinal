@@ -39,14 +39,14 @@ public class Fragment_CadastrarOrdenha extends Fragment {
     FirebaseDatabase mFirebase;
 
 
-
     @SuppressLint("ValidFragment")
     public Fragment_CadastrarOrdenha(String id) {
         // Required empty public constructor
         this.id = id;
-
     }
 
+    public Fragment_CadastrarOrdenha() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -129,9 +129,11 @@ public class Fragment_CadastrarOrdenha extends Fragment {
 
             databaseOrdenha.child(idOr).setValue(ordenha);
 
+
             Fragment_ListarOrdenha fragment_listarOrdenha = new Fragment_ListarOrdenha(id);
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal,fragment_listarOrdenha).addToBackStack(null).commit();
 
+//            getActivity().getSupportFragmentManager().popBackStack();
         }else{
             Toast.makeText(getContext(), "Preencha Corretamente o Cadastro", Toast.LENGTH_SHORT).show();
         }

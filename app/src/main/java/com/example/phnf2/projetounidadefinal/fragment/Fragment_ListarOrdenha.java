@@ -87,7 +87,7 @@ public class Fragment_ListarOrdenha extends Fragment {
 
                 Fragment_CadastrarOrdenha fragment_cadastrarOrdenha = new Fragment_CadastrarOrdenha(id);
 
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal,fragment_cadastrarOrdenha).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal,fragment_cadastrarOrdenha).addToBackStack(null).commit();
             }
         });
 
