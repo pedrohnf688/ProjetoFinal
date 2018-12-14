@@ -74,7 +74,6 @@ public class Fragment_ListarUser extends Fragment {
 
                         Usuario user4 = listUsuarios.get(position);
                         Fragment_ListarRelatorio fragment = new Fragment_ListarRelatorio(user4.getIdUser(),user4.getNomeUser());
-                        Toast.makeText(getContext(), "Nome:"+user4.getNomeUser(), Toast.LENGTH_SHORT).show();
                         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal,fragment).addToBackStack(null).commit();
 
                     }

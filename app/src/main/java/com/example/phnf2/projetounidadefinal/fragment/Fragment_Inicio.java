@@ -70,6 +70,7 @@ public class Fragment_Inicio extends Fragment {
                 if (user != null) {
                     //logado
                     onSignInInitialize(user.getDisplayName());
+
                 } else {
                     //não-logado
                     onSignOutCleanUp();

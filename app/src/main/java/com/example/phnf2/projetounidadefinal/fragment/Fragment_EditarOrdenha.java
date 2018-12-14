@@ -15,16 +15,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.phnf2.projetounidadefinal.R;
-import com.example.phnf2.projetounidadefinal.adapter.EditarOrdenhas;
 import com.example.phnf2.projetounidadefinal.adapter.ListaOrdenhaAdapter;
 import com.example.phnf2.projetounidadefinal.adapter.RecyclerItemClickListener;
-import com.example.phnf2.projetounidadefinal.adapter.RecyclerOrdenhaClickListener;
 import com.example.phnf2.projetounidadefinal.modelo.Ordenha;
-import com.example.phnf2.projetounidadefinal.modelo.RelatorioProducaoLeite;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -82,7 +78,7 @@ public class Fragment_EditarOrdenha extends Fragment {
         }
 
 
-        recycler.addOnItemTouchListener(new RecyclerOrdenhaClickListener(getContext(), recycler, new RecyclerItemClickListener.OnItemClickListener() {
+        recycler.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), recycler, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
 
@@ -203,7 +199,7 @@ public class Fragment_EditarOrdenha extends Fragment {
 
                 }
 
-                recycler.setAdapter(new EditarOrdenhas(getContext(),ordenhaList));
+                recycler.setAdapter(new ListaOrdenhaAdapter(getContext(),ordenhaList));
 
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
                 recycler.setLayoutManager(layoutManager);

@@ -16,12 +16,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingRight="20dp"
-        android:paddingLeft="20dp">
+        android:paddingLeft="5dp">
+
+        <ImageView
+            android:id="@+id/relatorioPhoto"
+            android:layout_width="85dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_report" />
+
     <LinearLayout
         android:id="@+id/li33"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
         android:orientation="vertical">
 
 

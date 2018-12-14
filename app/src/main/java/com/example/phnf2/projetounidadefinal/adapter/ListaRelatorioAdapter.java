@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.phnf2.projetounidadefinal.R;
@@ -18,6 +19,8 @@ import com.example.phnf2.projetounidadefinal.fragment.Fragment_CadastroRelatorio
 import com.example.phnf2.projetounidadefinal.modelo.RelatorioProducaoLeite;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ListaRelatorioAdapter extends RecyclerView.Adapter {
 
@@ -49,6 +52,7 @@ public class ListaRelatorioAdapter extends RecyclerView.Adapter {
         holderRelatorio.textViewTitulo2.setText(relatorioescolhido.getTituloRelatorio());
         holderRelatorio.textViewTipo2.setText(relatorioescolhido.getTipoRelatorio());
         holderRelatorio.textViewData2.setText(relatorioescolhido.getDataRelatorio());
+        holderRelatorio.photoRelatorio.setImageResource(R.drawable.ic_report);
 
 
     }
@@ -64,7 +68,7 @@ public class ListaRelatorioAdapter extends RecyclerView.Adapter {
         final TextView textViewTitulo2;
         final TextView textViewTipo2;
         final TextView textViewData2;
-
+        final ImageView photoRelatorio;
 
         public ViewHolderRelatorio(@NonNull View itemView) {
             super(itemView);
@@ -72,7 +76,7 @@ public class ListaRelatorioAdapter extends RecyclerView.Adapter {
             textViewTitulo2 = itemView.findViewById(R.id.textViewTitulo);
             textViewTipo2 = itemView.findViewById(R.id.textViewTipo);
             textViewData2 = itemView.findViewById(R.id.textViewData);
-
+            photoRelatorio = itemView.findViewById(R.id.relatorioPhoto);
 
         }
     }

@@ -6,56 +6,69 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:clickable="true"
+    android:elevation="8dp"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    card_view:cardCornerRadius="4dp"
-    android:elevation="8dp">
+    card_view:cardCornerRadius="4dp">
 
     <LinearLayout
         android:id="@+id/li3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp">
-    <LinearLayout
-        android:id="@+id/li2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:paddingLeft="5dp">
 
-        <TextView
-            android:id="@+id/MostraNome"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/fotoUsuarioList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nome:"
-            android:textStyle="bold"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
-        <TextView
-            android:id="@+id/MostrarEmail"
+            android:layout_gravity="center"
+            android:src="@mipmap/ic_launcher" />
+
+        <LinearLayout
+            android:id="@+id/li2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Email:"
-            android:textStyle="bold"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/li1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+            android:paddingLeft="5dp"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/MostraNome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="Nome:"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/MostrarEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="Email:"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/li1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
 
             <TextView
                 android:id="@+id/textViewNome"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
             <TextView
                 android:id="@+id/textViewEmail"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />

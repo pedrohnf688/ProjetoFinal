@@ -110,7 +110,6 @@ public class Fragment_CadastroRelatorio extends Fragment {
 
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal,fragment_listarRelatorio).addToBackStack(null).commit();
 
-         // getActivity().getSupportFragmentManager().popBackStack();
 
         } else {
             Toast.makeText(getContext(), "Preencha Corretamente o Cadastro", Toast.LENGTH_SHORT).show();

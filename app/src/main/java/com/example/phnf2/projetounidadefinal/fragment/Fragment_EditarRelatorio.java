@@ -5,8 +5,6 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,16 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.phnf2.projetounidadefinal.R;
-import com.example.phnf2.projetounidadefinal.adapter.EditarRelatorios;
-import com.example.phnf2.projetounidadefinal.adapter.ListAdapter;
+import com.example.phnf2.projetounidadefinal.adapter.ListaRelatorioAdapter;
 import com.example.phnf2.projetounidadefinal.adapter.RecyclerItemClickListener;
-import com.example.phnf2.projetounidadefinal.adapter.RecyclerRelatorioClickListener;
 import com.example.phnf2.projetounidadefinal.modelo.RelatorioProducaoLeite;
-import com.example.phnf2.projetounidadefinal.modelo.Usuario;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,9 +31,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -75,7 +67,7 @@ public class Fragment_EditarRelatorio extends Fragment {
 
         databaseRelatorioEditar = FirebaseDatabase.getInstance().getReference("Relatorios").child(id);
 
-        recyclerViewRelatorioEditar.addOnItemTouchListener(new RecyclerRelatorioClickListener(getContext(), recyclerViewRelatorioEditar, new RecyclerItemClickListener.OnItemClickListener() {
+        recyclerViewRelatorioEditar.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), recyclerViewRelatorioEditar, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 final RelatorioProducaoLeite producao = relatorioProducaoList.get(position);
@@ -192,7 +184,7 @@ public class Fragment_EditarRelatorio extends Fragment {
 
                 }
 
-                EditarRelatorios adapter = new EditarRelatorios(getContext(), relatorioProducaoList);
+                ListaRelatorioAdapter adapter = new ListaRelatorioAdapter(getContext(), relatorioProducaoList);
                 recyclerViewRelatorioEditar.setAdapter(adapter);
 
                 RecyclerView.LayoutManager layout = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);

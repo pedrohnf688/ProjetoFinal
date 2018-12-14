@@ -1,7 +1,5 @@
 package com.example.phnf2.projetounidadefinal.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -11,14 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.example.phnf2.projetounidadefinal.R;
-import com.example.phnf2.projetounidadefinal.adapter.EditarUsers;
 import com.example.phnf2.projetounidadefinal.adapter.ListAdapter;
 import com.example.phnf2.projetounidadefinal.adapter.RecyclerItemClickListener;
-import com.example.phnf2.projetounidadefinal.adapter.RecyclerOrdenhaClickListener;
 import com.example.phnf2.projetounidadefinal.modelo.Usuario;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -65,7 +59,7 @@ public class Fragment_EditarUsers extends Fragment {
         }
 
 
-        recyclerViewListarUsuario.addOnItemTouchListener(new RecyclerOrdenhaClickListener(getContext(), recyclerViewListarUsuario, new RecyclerItemClickListener.OnItemClickListener() {
+        recyclerViewListarUsuario.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), recyclerViewListarUsuario, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
 

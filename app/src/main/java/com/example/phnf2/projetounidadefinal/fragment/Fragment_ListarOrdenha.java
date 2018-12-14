@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -14,14 +13,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.phnf2.projetounidadefinal.R;
 import com.example.phnf2.projetounidadefinal.adapter.ListaOrdenhaAdapter;
 import com.example.phnf2.projetounidadefinal.adapter.RecyclerItemClickListener;
-import com.example.phnf2.projetounidadefinal.adapter.RecyclerOrdenhaClickListener;
 import com.example.phnf2.projetounidadefinal.modelo.Ordenha;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,8 +26,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.example.phnf2.projetounidadefinal.util.FirebaseUtil.getCurrentUserId;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -96,7 +90,7 @@ public class Fragment_ListarOrdenha extends Fragment {
         Click's do recyclerView para visualizar o gráfico de cada ordenha do relatorio
          */
 
-        recyclerViewOrdenha.addOnItemTouchListener(new RecyclerOrdenhaClickListener(getContext(), recyclerViewOrdenha, new RecyclerItemClickListener.OnItemClickListener() {
+        recyclerViewOrdenha.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), recyclerViewOrdenha, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
 

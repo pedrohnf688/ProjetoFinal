@@ -15,8 +15,11 @@ import android.widget.TextView;
 
 import com.example.phnf2.projetounidadefinal.R;
 import com.example.phnf2.projetounidadefinal.modelo.Usuario;
+import com.example.phnf2.projetounidadefinal.util.FirebaseUtil;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ListAdapter extends RecyclerView.Adapter {
 
@@ -42,12 +45,24 @@ public class ListAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
-        ViewHolder listT = (ViewHolder) holder;
+       final ViewHolder listT = (ViewHolder) holder;
 
-        usuarioescolhido = listaUsuarios.get(position);
+       usuarioescolhido = listaUsuarios.get(position);
+       boolean fotoX = usuarioescolhido.getPhotoUser() != null;
 
         listT.textViewNome2.setText(usuarioescolhido.getNomeUser());
         listT.textViewEmail2.setText(usuarioescolhido.getEmailUser());
+        if(fotoX){
+
+            FirebaseUtil.loadProfileIcon(usuarioescolhido.getPhotoUser(),listT.fotoUsuario);
+        }else{
+
+            listT.fotoUsuario.setImageResource(R.mipmap.ic_launcher);
+        }
+
+
+
+
 
     }
 
@@ -61,13 +76,14 @@ public class ListAdapter extends RecyclerView.Adapter {
 
         final TextView textViewNome2;
         final TextView textViewEmail2;
+        final CircleImageView fotoUsuario;
 
         public ViewHolder(View v) {
             super(v);
 
             textViewNome2 = v.findViewById(R.id.textViewNome);
             textViewEmail2 = v.findViewById(R.id.textViewEmail);
-
+            fotoUsuario = v.findViewById(R.id.fotoUsuarioList);
         }
     }
 }

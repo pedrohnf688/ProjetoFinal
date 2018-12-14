@@ -2,7 +2,6 @@ package com.example.phnf2.projetounidadefinal.fragment;
 
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -10,25 +9,19 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.phnf2.projetounidadefinal.adapter.ListAdapter;
 import com.example.phnf2.projetounidadefinal.adapter.ListaRelatorioAdapter;
 import com.example.phnf2.projetounidadefinal.R;
 import com.example.phnf2.projetounidadefinal.adapter.RecyclerItemClickListener;
-import com.example.phnf2.projetounidadefinal.adapter.RecyclerRelatorioClickListener;
 import com.example.phnf2.projetounidadefinal.modelo.RelatorioProducaoLeite;
-import com.example.phnf2.projetounidadefinal.modelo.Usuario;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.core.Context;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,7 +86,7 @@ public class Fragment_ListarRelatorio extends Fragment {
         });
 
 
-        recyclerViewRelatorio.addOnItemTouchListener(new RecyclerRelatorioClickListener(getContext(), recyclerViewRelatorio, new RecyclerItemClickListener.OnItemClickListener() {
+        recyclerViewRelatorio.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), recyclerViewRelatorio, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
 

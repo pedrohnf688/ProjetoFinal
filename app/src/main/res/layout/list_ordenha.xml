@@ -168,25 +168,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Esd:"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textStyle="bold"/>
             <TextView
                 android:id="@+id/Nu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nu:"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textStyle="bold"/>
             <TextView
                 android:id="@+id/Cel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Cel:"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textStyle="bold"/>
             <TextView
                 android:id="@+id/Ccs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Css:"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textStyle="bold"/>
 
 
         </LinearLayout>
