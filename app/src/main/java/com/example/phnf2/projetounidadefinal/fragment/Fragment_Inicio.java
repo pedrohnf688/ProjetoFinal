@@ -174,6 +174,7 @@ public class Fragment_Inicio extends Fragment {
         if (requestCode == CODIGO_LOGAR) {
             if (resultCode == RESULT_OK) {
                 Toast.makeText(getContext(), "Eai,"+firebaseAuth.getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getContext(),Principal.class));
             } else if (resultCode == RESULT_CANCELED) {
 
             }

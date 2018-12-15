@@ -39,7 +39,7 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-auth:4.2.1'
     implementation 'com.google.firebase:firebase-auth:16.0.3'
 
-    //Login do Twitter
+    // Twitter
     implementation 'com.twitter.sdk.android:twitter:3.3.0@aar'
     implementation 'com.twitter.sdk.android:twitter-core:3.1.1'
 
