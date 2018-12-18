@@ -15,8 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.phnf2.projetounidadefinal.R;
 import com.example.phnf2.projetounidadefinal.adapter.ListaRelatorioAdapter;
 import com.example.phnf2.projetounidadefinal.adapter.RecyclerItemClickListener;
@@ -42,10 +45,9 @@ public class Fragment_EditarRelatorio extends Fragment {
     static String id;
     RecyclerView recyclerViewRelatorioEditar;
     DatabaseReference databaseRelatorioEditar;
-    DatabaseReference databaseOrdenhaEditar;
     List<RelatorioProducaoLeite> relatorioProducaoList = new ArrayList<>();
     DatabaseReference drOrdenha;
-
+    TextView textEditarRelatorio;
 
     @SuppressLint("ValidFragment")
     public Fragment_EditarRelatorio(String id) {
@@ -64,6 +66,7 @@ public class Fragment_EditarRelatorio extends Fragment {
 
 
         recyclerViewRelatorioEditar = view.findViewById(R.id.recyclerViewListarRelatorios);
+        textEditarRelatorio = view.findViewById(R.id.textViewEditarRelatorio);
 
         databaseRelatorioEditar = FirebaseDatabase.getInstance().getReference("Relatorios").child(id);
 
@@ -98,13 +101,32 @@ public class Fragment_EditarRelatorio extends Fragment {
 
                         if(!TextUtils.isEmpty(tituloNovo) && !TextUtils.isEmpty(tipoNovo)){
 
-                            DatabaseReference databaserelatorio = FirebaseDatabase.getInstance().getReference("Relatorios").child(idString()).child(producao.getIdRelatorio());
+                            final DatabaseReference databaserelatorio = FirebaseDatabase.getInstance().getReference("Relatorios").child(idString()).child(producao.getIdRelatorio());
 
-                            RelatorioProducaoLeite producaoLeite = new RelatorioProducaoLeite(producao.getIdRelatorio(),tituloNovo,tipoNovo,DataSistema());
+                            final RelatorioProducaoLeite producaoLeite = new RelatorioProducaoLeite(producao.getIdRelatorio(),tituloNovo,tipoNovo,DataSistema());
 
-                            databaserelatorio.setValue(producaoLeite);
+                            MaterialDialog dialog = new MaterialDialog.Builder(getContext())
+                                    .title("Atualizar")
+                                    .content("Tem certeza que deseja atualizar os dados do relatório!")
+                                    .positiveText("Sim")
+                                    .negativeText("Não")
+                                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                        @Override
+                                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                            databaserelatorio.setValue(producaoLeite);
+                                            alertDialog.dismiss();
+                                            Toast.makeText(getContext(), "Relatório Atualizado com Sucesso!", Toast.LENGTH_SHORT).show();
 
-                            alertDialog.dismiss();
+                                        }
+                                    })
+                                    .onNegative(new MaterialDialog.SingleButtonCallback() {
+                                        @Override
+                                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                            alertDialog.dismiss();
+                                        }
+                                    })
+                                    .build();
+                            dialog.show();
 
                         }else {
 
@@ -117,13 +139,35 @@ public class Fragment_EditarRelatorio extends Fragment {
                     @Override
                     public void onClick(View v) {
 
-                       DatabaseReference databaserelatorio = FirebaseDatabase.getInstance().getReference("Relatorios").child(idString()).child(producao.getIdRelatorio());
-                       DatabaseReference databaseOrdenha = FirebaseDatabase.getInstance().getReference("Ordenhas").child(producao.getIdRelatorio());
+                       final DatabaseReference databaserelatorio = FirebaseDatabase.getInstance().getReference("Relatorios").child(idString()).child(producao.getIdRelatorio());
+                       final DatabaseReference databaseOrdenha = FirebaseDatabase.getInstance().getReference("Ordenhas").child(producao.getIdRelatorio());
 
-                       databaserelatorio.removeValue();
-                       databaseOrdenha.removeValue();
+                        MaterialDialog dialog = new MaterialDialog.Builder(getContext())
+                                .title("Deletar")
+                                .content("Tem certeza que deseja deletar os dados do relatório!")
+                                .positiveText("Sim")
+                                .negativeText("Não")
+                                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                        databaserelatorio.removeValue();
+                                        databaseOrdenha.removeValue();
 
-                       alertDialog.dismiss();
+                                        alertDialog.dismiss();
+                                        Toast.makeText(getContext(), "Relatório Deletado com Sucesso!", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                        alertDialog.dismiss();
+                                    }
+                                })
+                                .build();
+                        dialog.show();
+
+
+
 
                     }
                 });
@@ -190,6 +234,15 @@ public class Fragment_EditarRelatorio extends Fragment {
                 RecyclerView.LayoutManager layout = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
                 recyclerViewRelatorioEditar.setLayoutManager(layout);
                 recyclerViewRelatorioEditar.setItemAnimator(new DefaultItemAnimator());
+
+                if(relatorioProducaoList.size() == 0){
+                    textEditarRelatorio.setVisibility(View.VISIBLE);
+                    textEditarRelatorio.setText("Não tem Relatórios Cadastrados!");
+                }else{
+                    textEditarRelatorio.setVisibility(View.GONE);
+                }
+
+
             }
 
             @Override

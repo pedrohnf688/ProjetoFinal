@@ -15,8 +15,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.phnf2.projetounidadefinal.R;
 import com.example.phnf2.projetounidadefinal.adapter.ListaOrdenhaAdapter;
 import com.example.phnf2.projetounidadefinal.adapter.RecyclerItemClickListener;
@@ -42,7 +45,7 @@ public class Fragment_EditarOrdenha extends Fragment {
     public static List<Ordenha> ordenhaList = new ArrayList<>();
     RecyclerView recycler;
     private FirebaseDatabase mFirebase;
-
+    TextView textEditarOrdenha;
 
 
     @SuppressLint("ValidFragment")
@@ -64,6 +67,7 @@ public class Fragment_EditarOrdenha extends Fragment {
          */
 
         recycler = view.findViewById(R.id.recyclerviewEditarOrdenha);
+        textEditarOrdenha = view.findViewById(R.id.textViewEditarOrdenha);
 
         mFirebase = FirebaseDatabase.getInstance();
 
@@ -136,12 +140,33 @@ public class Fragment_EditarOrdenha extends Fragment {
                             double CcsSaida = Double.parseDouble(ccs4);
 
 
-                            DatabaseReference databaseordenha = FirebaseDatabase.getInstance().getReference("Ordenhas").child(getOrdenhaID()).child(ordenhaEcolhida.getIdOrdenha());
+                            final DatabaseReference databaseordenha = FirebaseDatabase.getInstance().getReference("Ordenhas").child(getOrdenhaID()).child(ordenhaEcolhida.getIdOrdenha());
 
-                            Ordenha ordenhaNova = new Ordenha(ordenhaEcolhida.getIdOrdenha(),GorSaida,ProtSaida,CasSaida,LactSaida,StSaida,EsdSaida,NuSaida,CelSaida,CcsSaida);
-                            databaseordenha.setValue(ordenhaNova);
+                            final Ordenha ordenhaNova = new Ordenha(ordenhaEcolhida.getIdOrdenha(),GorSaida,ProtSaida,CasSaida,LactSaida,StSaida,EsdSaida,NuSaida,CelSaida,CcsSaida);
 
-                            alertDialog.dismiss();
+                            MaterialDialog dialog = new MaterialDialog.Builder(getContext())
+                                    .title("Atualizar")
+                                    .content("Tem certeza que deseja atualizar os dados da ordenha!")
+                                    .positiveText("Sim")
+                                    .negativeText("Não")
+                                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                        @Override
+                                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                            databaseordenha.setValue(ordenhaNova);
+                                            alertDialog.dismiss();
+
+                                            Toast.makeText(getContext(), "Ordenha Atualizada com Sucesso!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    })
+                                    .onNegative(new MaterialDialog.SingleButtonCallback() {
+                                        @Override
+                                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                            alertDialog.dismiss();
+                                        }
+                                    })
+                                    .build();
+                            dialog.show();
+
 
                         }else{
                             Toast.makeText(getContext(), "Preencha o Novos Dados!", Toast.LENGTH_SHORT).show();
@@ -154,10 +179,33 @@ public class Fragment_EditarOrdenha extends Fragment {
                     @Override
                     public void onClick(View v) {
 
-                        DatabaseReference databaseordenha = FirebaseDatabase.getInstance().getReference("Ordenhas").child(getOrdenhaID()).child(ordenhaEcolhida.getIdOrdenha());
-                        databaseordenha.removeValue();
+                        final DatabaseReference databaseordenha = FirebaseDatabase.getInstance().getReference("Ordenhas").child(getOrdenhaID()).child(ordenhaEcolhida.getIdOrdenha());
 
-                        alertDialog.dismiss();
+                        MaterialDialog dialog = new MaterialDialog.Builder(getContext())
+                                .title("Deletar")
+                                .content("Tem certeza que deseja deletar os dados da ordenha!")
+                                .positiveText("Sim")
+                                .negativeText("Não")
+                                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                        databaseordenha.removeValue();
+
+                                        alertDialog.dismiss();
+
+                                        Toast.makeText(getContext(), "Ordenha Deletada com Sucesso!", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                      alertDialog.dismiss();
+                                    }
+                                })
+                                .build();
+                        dialog.show();
+
+
                     }
                 });
 
@@ -170,7 +218,6 @@ public class Fragment_EditarOrdenha extends Fragment {
         }));
 
 
-
         return view;
     }
 
@@ -178,7 +225,6 @@ public class Fragment_EditarOrdenha extends Fragment {
     public static String getOrdenhaID(){
         return id;
     }
-
 
 
     @Override
@@ -205,7 +251,12 @@ public class Fragment_EditarOrdenha extends Fragment {
                 recycler.setLayoutManager(layoutManager);
                 recycler.setItemAnimator(new DefaultItemAnimator());
 
-
+                if(ordenhaList.size() == 0){
+                    textEditarOrdenha.setVisibility(View.VISIBLE);
+                    textEditarOrdenha.setText("Não tem Ordenhas Cadastradas!");
+                }else{
+                    textEditarOrdenha.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -216,9 +267,5 @@ public class Fragment_EditarOrdenha extends Fragment {
 
 
     }
-
-
-
-
 
 }

@@ -57,7 +57,7 @@ public class ListAdapter extends RecyclerView.Adapter {
             FirebaseUtil.loadProfileIcon(usuarioescolhido.getPhotoUser(),listT.fotoUsuario);
         }else{
 
-            listT.fotoUsuario.setImageResource(R.mipmap.ic_launcher);
+            listT.fotoUsuario.setImageResource(R.drawable.ic_iconuser );
         }
 
 

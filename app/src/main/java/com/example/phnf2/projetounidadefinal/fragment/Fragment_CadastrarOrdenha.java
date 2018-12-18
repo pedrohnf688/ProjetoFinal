@@ -122,12 +122,21 @@ public class Fragment_CadastrarOrdenha extends Fragment {
             double Cel = Double.parseDouble(cel3);
             double Ccs = Double.parseDouble(ccs3);
 
-
             String idOr = databaseOrdenha.push().getKey();
 
             Ordenha ordenha = new Ordenha(idOr,Gor,Prot,Cas,Lact,St,Esd,Nu,Cel,Ccs);
 
             databaseOrdenha.child(idOr).setValue(ordenha);
+
+            Gord2.setText("");
+            Prot2.setText("");
+            Cas2.setText("");
+            Lact2.setText("");
+            St2.setText("");
+            Esd2.setText("");
+            Nu2.setText("");
+            Cel2.setText("");
+            Ccs2.setText("");
 
 
             Fragment_ListarOrdenha fragment_listarOrdenha = new Fragment_ListarOrdenha(id);

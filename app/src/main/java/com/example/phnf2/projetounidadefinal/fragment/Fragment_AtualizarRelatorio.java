@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.phnf2.projetounidadefinal.R;
 import com.example.phnf2.projetounidadefinal.adapter.ListaRelatorioAdapter;
@@ -36,6 +37,7 @@ public class Fragment_AtualizarRelatorio extends Fragment {
     public static List<RelatorioProducaoLeite> listRelatorio = new ArrayList<>();
     RecyclerView recyclerEditarUserRelatorio;
     private FirebaseDatabase mFirebase;
+    TextView textAtualizarRelatorio;
 
     @SuppressLint("ValidFragment")
     public Fragment_AtualizarRelatorio(String id) {
@@ -51,7 +53,7 @@ public class Fragment_AtualizarRelatorio extends Fragment {
         View view = inflater.inflate(R.layout.fragment_fragment__atualizar_relatorio, container, false);
 
         recyclerEditarUserRelatorio = view.findViewById(R.id.recyclerEditarRelatorioOrdenha);
-
+        textAtualizarRelatorio = view.findViewById(R.id.textViewAtualizarRelatorio);
 
         mFirebase = FirebaseDatabase.getInstance();
 
@@ -112,6 +114,12 @@ public class Fragment_AtualizarRelatorio extends Fragment {
                 recyclerEditarUserRelatorio.setLayoutManager(layoutManager);
                 recyclerEditarUserRelatorio.setItemAnimator(new DefaultItemAnimator());
 
+                if(listRelatorio.size() == 0){
+                    textAtualizarRelatorio.setVisibility(View.VISIBLE);
+                    textAtualizarRelatorio.setText("Não tem Relatórios Cadastrados!");
+                }else{
+                    textAtualizarRelatorio.setVisibility(View.GONE);
+                }
 
             }
 

@@ -106,6 +106,9 @@ public class Fragment_CadastroRelatorio extends Fragment {
 
             databaseRelatorios.child(idR).setValue(rel);
 
+            titulo2.setText("");
+            tipo2.setText("");
+
             Fragment_ListarRelatorio fragment_listarRelatorio = new Fragment_ListarRelatorio(id,nome);
 
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentPrincipal,fragment_listarRelatorio).addToBackStack(null).commit();

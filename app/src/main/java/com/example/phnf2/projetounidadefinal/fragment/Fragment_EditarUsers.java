@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.phnf2.projetounidadefinal.R;
 import com.example.phnf2.projetounidadefinal.adapter.ListAdapter;
@@ -25,11 +26,11 @@ import java.util.List;
 
 public class Fragment_EditarUsers extends Fragment {
 
-
     DatabaseReference databaseUsuario;
     public static List<Usuario> listUsuarios = new ArrayList<>();
     RecyclerView recyclerViewListarUsuario;
     private FirebaseDatabase mFirebase;
+    TextView textEditarUser;
 
     public Fragment_EditarUsers() {
         // Required empty public constructor
@@ -43,7 +44,7 @@ public class Fragment_EditarUsers extends Fragment {
         View view = inflater.inflate(R.layout.fragment_fragment__editar_users, container, false);
 
         recyclerViewListarUsuario = view.findViewById(R.id.recyclerviewListarUsuarios);
-
+        textEditarUser = view.findViewById(R.id.textViewEditarUser);
 
         mFirebase = FirebaseDatabase.getInstance();
 
@@ -79,7 +80,6 @@ public class Fragment_EditarUsers extends Fragment {
 
 
 
-
         return view;
     }
 
@@ -108,6 +108,14 @@ public class Fragment_EditarUsers extends Fragment {
                 RecyclerView.LayoutManager layout = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
                 recyclerViewListarUsuario.setLayoutManager(layout);
                 recyclerViewListarUsuario.setItemAnimator(new DefaultItemAnimator());
+
+                if(listUsuarios.size() == 0){
+                    textEditarUser.setVisibility(View.VISIBLE);
+                    textEditarUser.setText("Não tem Usuários Cadastrados!");
+                }else{
+                    textEditarUser.setVisibility(View.GONE);
+                }
+
             }
 
             @Override

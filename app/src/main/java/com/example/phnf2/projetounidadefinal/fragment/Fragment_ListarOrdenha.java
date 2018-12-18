@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.phnf2.projetounidadefinal.R;
 import com.example.phnf2.projetounidadefinal.adapter.ListaOrdenhaAdapter;
@@ -39,7 +40,7 @@ public class Fragment_ListarOrdenha extends Fragment {
     FloatingActionButton floatingActionAddOrdenha;
     public String id;
     private FirebaseDatabase mFirebase;
-
+    TextView textOrdenha;
 
     @SuppressLint("ValidFragment")
     public Fragment_ListarOrdenha(String id) {
@@ -56,7 +57,7 @@ public class Fragment_ListarOrdenha extends Fragment {
 
         recyclerViewOrdenha = view.findViewById(R.id.recyclerOrdenha);
         floatingActionAddOrdenha = view.findViewById(R.id.fabOrdenha);
-
+        textOrdenha = view.findViewById(R.id.textOrdenhaTAM);
 
         mFirebase = FirebaseDatabase.getInstance();
 
@@ -137,6 +138,12 @@ public class Fragment_ListarOrdenha extends Fragment {
                 recyclerViewOrdenha.setLayoutManager(layoutManager);
                 recyclerViewOrdenha.setItemAnimator(new DefaultItemAnimator());
 
+                if(listaOrdenha.size() == 0){
+                    textOrdenha.setVisibility(View.VISIBLE);
+                    textOrdenha.setText("Não tem Ordenhas Cadastras!");
+                }else{
+                    textOrdenha.setVisibility(View.GONE);
+                }
 
             }
 

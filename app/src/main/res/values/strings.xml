@@ -11,6 +11,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="sobre">
+        O Aplicativo do Administrador têm como objetivo fazer uma gerência dos dados de ordenha para criar relatórios e com isso gerar gráficos.\n Aplicativo desenvolvido por Pedro Henrique.\n
+    \nContato:\n
+    Email: <a href="#">phnf2014@gmail.com</a> \n
+    Github: <a href="https://github.com/pedrohnf">pedrohnf</a>\n
+    Créditos dos icones: <a href="https://www.flaticon.com">https://www.flaticon.com</a>
+    </string>
+
 
     <string name="twitter_consumer_key" translatable="false">MOEJ406E8KniMqCrhT5T7o5bx</string>
     <string name="twitter_consumer_secret" translatable="false">dlVJTZoXFBVzxWGmx1d9amm5JCLvbPQeIbQJlBh0fopyZTF4S9</string>

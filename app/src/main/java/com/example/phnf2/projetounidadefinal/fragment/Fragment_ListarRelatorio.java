@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.phnf2.projetounidadefinal.adapter.ListaRelatorioAdapter;
 import com.example.phnf2.projetounidadefinal.R;
@@ -39,6 +40,7 @@ public class Fragment_ListarRelatorio extends Fragment {
     public String id;
     public String nome;
     private FirebaseDatabase mFirebase;
+    TextView textViewRelatorio;
 
 
     @SuppressLint("ValidFragment")
@@ -60,7 +62,7 @@ public class Fragment_ListarRelatorio extends Fragment {
 
         recyclerViewRelatorio = view.findViewById(R.id.recyclerViewListarRelatorio);
         floatingActionAddRelatorio = view.findViewById(R.id.fab);
-
+        textViewRelatorio = view.findViewById(R.id.textRelatorioTAM);
 
             mFirebase = FirebaseDatabase.getInstance();
 
@@ -133,6 +135,12 @@ public class Fragment_ListarRelatorio extends Fragment {
                 recyclerViewRelatorio.setLayoutManager(layoutManager);
                 recyclerViewRelatorio.setItemAnimator(new DefaultItemAnimator());
 
+                if(listarRelatorios.size() == 0){
+                    textViewRelatorio.setVisibility(View.VISIBLE);
+                    textViewRelatorio.setText("Não tem Relatórios Cadastrados!");
+                }else{
+                    textViewRelatorio.setVisibility(View.GONE);
+                }
 
             }
 

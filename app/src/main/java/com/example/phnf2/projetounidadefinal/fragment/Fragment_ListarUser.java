@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.phnf2.projetounidadefinal.Principal;
@@ -38,6 +39,7 @@ public class Fragment_ListarUser extends Fragment {
     RecyclerView listViewUsuario;
     DatabaseReference databaseUsuario;
     private FirebaseDatabase mFirebase;
+    TextView textListarUser;
 
     public Fragment_ListarUser() {
         // Required empty public constructor
@@ -50,10 +52,10 @@ public class Fragment_ListarUser extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_fragment__listar_user, container, false);
 
-
         listViewUsuario = view.findViewById(R.id.ListViewUsuario);
+        textListarUser = view.findViewById(R.id.textViewListarUser);
 
-           mFirebase = FirebaseDatabase.getInstance();
+        mFirebase = FirebaseDatabase.getInstance();
 
         if(mFirebase == null) {
 
@@ -115,6 +117,13 @@ public class Fragment_ListarUser extends Fragment {
                 RecyclerView.LayoutManager layout = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
                 listViewUsuario.setLayoutManager(layout);
                 listViewUsuario.setItemAnimator(new DefaultItemAnimator());
+
+                if(listUsuarios.size() == 0){
+                    textListarUser.setVisibility(View.VISIBLE);
+                    textListarUser.setText("Não tem Usuários Cadastrados!");
+                }else{
+                    textListarUser.setVisibility(View.GONE);
+                }
             }
 
             @Override
